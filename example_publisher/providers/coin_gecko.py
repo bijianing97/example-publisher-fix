@@ -12,7 +12,7 @@ Id = str  # The "API id" of the CoinGecko price, listed on CoinGecko page for ea
 
 USD = "usd"
 
-eth_btc_symbol = 'USDB/USD'
+eth_btc_symbol = 'Crypto.ETH/BTC'
 eth_btc_id = 'eth/btc'  # 特殊处理的产品标识
 ethereum_id = 'ethereum'  # 以太坊的ID，用于获取价格
 bitcoin_id = 'bitcoin'
