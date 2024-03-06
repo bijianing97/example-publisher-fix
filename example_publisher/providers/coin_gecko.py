@@ -29,31 +29,14 @@ class CoinGecko(Provider):
 
     def upd_products(self, product_symbols: List[Symbol]) -> None:
         new_prices = {}
-        process_eth_btc_last = eth_btc_symbol in product_symbols
         for coin_gecko_product in self._config.products:
             if coin_gecko_product.symbol in product_symbols:
                 id = coin_gecko_product.coin_gecko_id
-                if id != eth_btc_id:
-                    new_prices[id] = self._prices.get(id, None)
+                new_prices[id] = self._prices.get(id, None)
             else:
                 raise ValueError(
                     f"{coin_gecko_product.symbol} not found in available products"  # noqa: E713
                 )
-
-        if process_eth_btc_last:
-            if ethereum_id in new_prices and bitcoin_id in new_prices:
-                ethereum_price = new_prices[ethereum_id]
-                bitcoin_price = new_prices[bitcoin_id]
-
-            # 避免除以零
-                if bitcoin_price != 0:
-                    new_prices[eth_btc_id] = ethereum_price / bitcoin_price
-                else:
-                    new_prices[eth_btc_id] = 0  # 或者设定一个错误值/标记
-                    log.error("Bitcoin price is zero. Skipping 'eth/btc'.")
-        else:
-            # 如果没有 ethereum 或 bitcoin 的价格，可以选择记录错误或跳过
-            log.error("upd_products Ethereum or Bitcoin price not found. Skipping 'eth/btc'.")
 
         self._prices = new_prices
 
