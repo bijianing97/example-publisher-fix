@@ -41,9 +41,9 @@ class CoinGecko(Provider):
                 )
 
         if process_eth_btc_last:
-            if ethereum_id in self._prices and bitcoin_id in self._prices:
-                ethereum_price = self._prices[ethereum_id]
-                bitcoin_price = self._prices[bitcoin_id]
+            if ethereum_id in new_prices and bitcoin_id in new_prices:
+                ethereum_price = new_prices[ethereum_id]
+                bitcoin_price = new_prices[bitcoin_id]
 
             # 避免除以零
                 if bitcoin_price != 0:
