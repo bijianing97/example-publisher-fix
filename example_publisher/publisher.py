@@ -1,7 +1,7 @@
 import asyncio
 from typing import Dict, List, Optional
 from attr import define
-from structlog import get_logger
+from structlog import get_logger, configure
 from example_publisher.provider import Provider
 
 from example_publisher.providers.coin_gecko import CoinGecko
@@ -9,8 +9,14 @@ from example_publisher.config import Config
 from example_publisher.providers.pyth_replicator import PythReplicator
 from example_publisher.pythd import Pythd, SubscriptionId
 
+import logging
+from structlog.stdlib import LoggerFactory
+
 
 log = get_logger()
+
+configure(logger_factory=LoggerFactory())
+logging.basicConfig(level=logging.INFO)
 
 TRADING = "trading"
 
@@ -122,7 +128,7 @@ class Publisher:
         product = self.subscriptions[subscription]
         price = self.provider.latest_price(product.symbol)
         if not price:
-            log.info("latest price not available", symbol=product.symbol)
+            # log.info("latest price not available", symbol=product.symbol)
             return
 
         # Scale the price and confidence interval using the Pyth exponent

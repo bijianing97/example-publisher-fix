@@ -18,6 +18,8 @@ class Pythd:
 
 @ts.settings
 class CoinGeckoConfig:
+    # api key for CoinGecko
+    api_key: str
     # How often to poll CoinGecko for price information
     update_interval_secs: int
     # The confidence interval rate (to the price) in basis points to use for CoinGecko updates
