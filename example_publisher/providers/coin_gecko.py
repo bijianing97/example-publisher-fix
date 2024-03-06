@@ -53,7 +53,7 @@ class CoinGecko(Provider):
                     log.error("Bitcoin price is zero. Skipping 'eth/btc'.")
         else:
             # 如果没有 ethereum 或 bitcoin 的价格，可以选择记录错误或跳过
-            log.error("Ethereum or Bitcoin price not found. Skipping 'eth/btc'.")
+            log.error("upd_products Ethereum or Bitcoin price not found. Skipping 'eth/btc'.")
 
         self._prices = new_prices
 
@@ -83,7 +83,7 @@ class CoinGecko(Provider):
                     self._prices[eth_btc_id] = 0  # 或设置为一个错误值/标记
                     log.error("Bitcoin price is zero. Skipping 'eth/btc'.")
             else:
-                log.error("Ethereum or Bitcoin price not found. Skipping 'eth/btc'.")
+                log.error("_update_prices Ethereum or Bitcoin price not found. Skipping 'eth/btc'.")
 
     def _get_price(self, id: Id) -> float:
         return self._prices.get(id, None)
